@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +12,17 @@ import { toast } from "sonner";
 import { CheckCircle2 } from "lucide-react";
 
 const extras = ["Erkély", "Terasz", "Garázs", "Tároló", "Kert", "Lift", "Központi fűtés", "Klíma"];
+
+const RECAPTCHA_SITE_KEY = "6LeA2tosAAAAAKQn4ujUqQq4WOp0dd1cu1ydZ4ka";
+
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, opts: { action: string }) => Promise<string>;
+    };
+  }
+}
 
 const schema = z.object({
   name: z.string().trim().min(2, "Adja meg a nevét").max(100),
@@ -28,8 +40,9 @@ export const QuoteForm = () => {
   const [selExtras, setSelExtras] = useState<string[]>([]);
   const [type, setType] = useState("lakas");
   const [condition, setCondition] = useState("jo");
+  const [loading, setLoading] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const data = {
@@ -47,7 +60,42 @@ export const QuoteForm = () => {
       toast.error(r.error.issues[0]?.message || "Hibás adatok");
       return;
     }
-    setSubmitted(true);
+
+    if (!window.grecaptcha) {
+      toast.error("A biztonsági ellenőrző még tölt, kérjük próbálja újra pár másodperc múlva.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const token = await new Promise<string>((resolve, reject) => {
+        window.grecaptcha!.ready(async () => {
+          try {
+            const t = await window.grecaptcha!.execute(RECAPTCHA_SITE_KEY, { action: "quote_submit" });
+            resolve(t);
+          } catch (err) {
+            reject(err);
+          }
+        });
+      });
+
+      const { data: resp, error } = await supabase.functions.invoke("verify-recaptcha", {
+        body: { token, formData: { ...data, extras: selExtras } },
+      });
+
+      if (error || !resp?.success) {
+        toast.error(resp?.error || "Nem sikerült beküldeni az ajánlatkérést, kérjük próbálja újra.");
+        setLoading(false);
+        return;
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      toast.error("Hiba történt a beküldés során.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -126,9 +174,15 @@ export const QuoteForm = () => {
               </div>
             </div>
           </div>
-          <Button type="submit" variant="hero" size="xl" className="w-full">
-            Küldés – kérek ajánlatot
+          <Button type="submit" variant="hero" size="xl" className="w-full" disabled={loading}>
+            {loading ? "Küldés folyamatban…" : "Küldés – kérek ajánlatot"}
           </Button>
+          <p className="text-xs text-muted-foreground text-center">
+            Az oldalt a Google reCAPTCHA védi.{" "}
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Adatvédelem</a>
+            {" · "}
+            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline">Feltételek</a>
+          </p>
         </form>
       </div>
     </section>
