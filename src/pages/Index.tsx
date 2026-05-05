@@ -1,16 +1,38 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { WhyUs } from "@/components/sections/WhyUs";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { ServiceArea } from "@/components/sections/ServiceArea";
+import { QuoteForm } from "@/components/sections/QuoteForm";
+import { Blog } from "@/components/sections/Blog";
+import { Faq } from "@/components/sections/Faq";
+import { Footer } from "@/components/sections/Footer";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Villámvétel",
+    description: "Ingatlanfelvásárlás készpénzért Budapesten és Pest megyében, 24–48 órán belüli ajánlattal.",
+    url: "https://villamvetel.hu",
+    areaServed: ["Budapest", "Pest megye"],
+  };
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      <Navbar />
+      <main>
+        <Hero />
+        <WhyUs />
+        <HowItWorks />
+        <ServiceArea />
+        <QuoteForm />
+        <Blog />
+        <Faq />
+      </main>
+      <Footer />
+    </>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
