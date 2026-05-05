@@ -1,35 +1,35 @@
-import { Zap, Wallet, Wrench, EyeOff, CalendarClock, ShieldCheck } from "lucide-react";
+import { Zap, Wallet, Wrench, FileWarning, ShieldCheck, CalendarClock } from "lucide-react";
 
 const items = [
   {
     icon: Zap,
     title: "Akár 1 napon belüli ajánlat",
-    desc: "Az adatok beérkezése után kollégáink rövid időn belül felveszik Önnel a kapcsolatot, és legkésőbb 1 munkanapon belül versenyképes vételi ajánlatot készítünk.",
+    desc: "A megadott adatok beérkezése után rövid időn belül felvesszük Önnel a kapcsolatot, és legkésőbb 1 munkanapon belül versenyképes, reális vételi ajánlatot készítünk. A folyamat gyors, átlátható és kiszámítható.",
   },
   {
     icon: Wallet,
     title: "Teljesen díjmentes eladás",
-    desc: "Nincsenek rejtett költségek és nem terheli közvetítői jutalék sem. A teljes folyamat – a felméréstől a szerződéskötésig – az Ön számára ingyenes.",
+    desc: "Nincsenek rejtett költségek, közvetítői díjak vagy váratlan kiadások. A teljes folyamat – az értékbecsléstől az adásvételi szerződésig – az Ön számára teljesen díjmentes.",
   },
   {
     icon: Wrench,
     title: "Felújítás nélkül is megvesszük",
-    desc: "Az ingatlant a jelenlegi, meglévő állapotában vásároljuk meg. Nem kell javításokra, takarításra vagy felújításra költenie az értékesítés előtt.",
+    desc: "Az ingatlant a jelenlegi állapotában vásároljuk meg, akkor is, ha felújítandó vagy erősen elhasználódott. Nem kell felújításra, takarításra vagy felkészítésre költenie az eladás előtt.",
   },
   {
-    icon: EyeOff,
-    title: "Diszkrét, biztonságos folyamat",
-    desc: "Nincs szükség hirdetésre, idegenek bemutatására vagy nyilvános érdeklődőkre. Az ügyletet bizalmas keretek között, kiszámíthatóan bonyolítjuk le.",
+    icon: FileWarning,
+    title: "Adóssággal terhelt ingatlant is megvásárolunk",
+    desc: "Akkor is számíthat ránk, ha az ingatlan jelzáloggal terhelt, közüzemi tartozásai vannak, vagy akár végrehajtási eljárás van kilátásba helyezve. Szakértőink biztonságos és átlátható ügyintézést biztosítanak terhelt ingatlanok vásárlásakor is, így gyors, rendezett folyamatra számíthat.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Diszkrét és megbízható szakértői csapat",
+    desc: "Tapasztalt, jogi és pénzügyi ismeretekkel rendelkező csapatunk minden ügyletet maximális diszkrécióval, bizalmasan és precízen kezel. Nem kell hirdetnie, idegeneket beengednie otthonába vagy hosszadalmas alkudozással foglalkoznia – a teljes folyamatot zárt, biztonságos keretek között bonyolítjuk le.",
   },
   {
     icon: CalendarClock,
     title: "Rugalmas kiköltözés",
-    desc: "Nem kell kapkodnia: az adásvételt követően egyeztetett ütemezés szerint, akár több hónap türelmi idővel is biztosítjuk a kiköltözést.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Tapasztalt, megbízható csapat",
-    desc: "Jogi, pénzügyi és piaci ismeretekkel rendelkező szakértőink minden lépést átláthatóan és precízen kezelnek Budapest és Pest megye területén.",
+    desc: "Nem szükséges kapkodnia: az adásvételt követően az Ön igényeihez igazodva előre egyeztetett határidőt biztosítunk a kiköltözésre. Kérésére akár 3 hónap türelmi időt is adunk a zökkenőmentes átmenet érdekében.",
   },
 ];
 
