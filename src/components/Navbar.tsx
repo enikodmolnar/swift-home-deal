@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 const links = [
   { href: "#hero", label: "Főoldal" },
@@ -14,23 +13,10 @@ const links = [
 ];
 
 export const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={cn(
-        "fixed top-0 inset-x-0 z-50 transition-smooth",
-        scrolled ? "bg-background/85 backdrop-blur-md shadow-soft" : "bg-transparent"
-      )}
-    >
+    <header className="fixed top-0 inset-x-0 z-50 bg-background/85 backdrop-blur-md shadow-soft transition-smooth">
       <nav className="container flex items-center justify-between h-16 md:h-20">
         <a href="#hero" className="flex items-center gap-2 font-semibold text-lg text-primary">
           <span className="inline-block w-3 h-3 rounded-sm bg-accent" />
