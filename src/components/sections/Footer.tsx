@@ -16,7 +16,7 @@ export const Footer = () => (
         <h4 className="font-semibold mb-4 text-primary-foreground">Kapcsolat</h4>
         <ul className="space-y-2 text-sm text-primary-foreground/80">
           <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-accent" /> <a href="tel:+36208046297" className="hover:text-accent transition-smooth">+36 20 804 6297</a></li>
-          <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-accent" /> info@villamvetel.hu</li>
+          <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-accent" /> <a href="mailto:villamvetelbudapest@gmail.com" className="hover:text-accent transition-smooth">villamvetelbudapest@gmail.com</a></li>
           <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-accent" /> Budapest + Pest megye</li>
         </ul>
       </div>
